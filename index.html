@@ -148,7 +148,11 @@
 </head>
 
 <div id='map'></div>
-
+	
+<!-- Load Esri Leaflet from CDN -->
+	<script src="https://unpkg.com/esri-leaflet@2.5.1/dist/esri-leaflet.js"
+	integrity="sha512-q7X96AASUF0hol5Ih7AeZpRF6smJS55lcvy+GLWzJfZN+31/BQ8cgNx2FGF+IQSA4z2jHwB20vml+drmooqzzQ=="
+	crossorigin=""></script>
 	<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
 	<script src="GeoJsons/MarinBnd.js"></script>
 	
@@ -204,6 +208,9 @@
 		}
 	});
 	countyLayer.addTo(map);
+
+	const closures = L.esri.featureLayer({url: 'https://services5.arcgis.com/tdQLEzq0fgVElWN3/arcgis/rest/services/MarinClosures_2020_ViewLayer/FeatureServer/0?token=LnMCOqvaoF4J59yY3FckdhlwQAZcqW56wUry4JkcHk26eNhSQ_WUh7TD7hYIQKJND_yKgPU8onMCyEk7UwnXAqgHvLPwN8zR-FekJ_5V03Kv5kXs8BRyP-4sFU1bkfIEeYl735UWS_RHBl8A0q_l_nuEx5OVGxiNU9yrrQZNaseMPjQbXUf_iSx4A7puiz7rKZEuYrJztPJv329yAJck6M96VCD-EUSKp_ZvF9QjxAM6OhdAxMMf7ZDGgGLZnBDN33bVCpSwFMfusV-hBKE4aQ..'})
+	closures.addTo(map)
 
 </script>
 
