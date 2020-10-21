@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset=utf-8 />
-	<title>Ochoco National Forest to John Day National Monument</title>
+	<title>Park and Open Space Closures in Marin County, California</title>
 	<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 	<link rel='icon' href='https://newmapsplus.github.io/favicon.ico' type='image/x-icon' />
 
@@ -213,7 +213,7 @@
 
 	// add viewLayer from AGOL
 	const closures = L.esri.featureLayer({url: 'https://services5.arcgis.com/tdQLEzq0fgVElWN3/arcgis/rest/services/MarinClosures_2020_ViewLayer/FeatureServer/0?token=LnMCOqvaoF4J59yY3FckdhlwQAZcqW56wUry4JkcHk26eNhSQ_WUh7TD7hYIQKJND_yKgPU8onMCyEk7UwnXAqgHvLPwN8zR-FekJ_5V03Kv5kXs8BRyP-4sFU1bkfIEeYl735UWS_RHBl8A0q_l_nuEx5OVGxiNU9yrrQZNaseMPjQbXUf_iSx4A7puiz7rKZEuYrJztPJv329yAJck6M96VCD-EUSKp_ZvF9QjxAM6OhdAxMMf7ZDGgGLZnBDN33bVCpSwFMfusV-hBKE4aQ..',
-	
+
 		// style feature based on propeties
 		style: function (feature) { 
       if (feature.properties.ClosStat == 'Open') {
@@ -237,8 +237,36 @@
 				opacity: false,
 				fillOpacity: false };	
 			}
-		}
-}).addTo(map);
+			// loop through closure objects
+			for(let i = 0; i < closures.length; i++) {
+				let props = closures[i].properties; // variable to access properties in closures
+
+				// declare popup variable
+				let popup = `<h3>${closures[i].name}</h3>`
+
+
+				// if statement to determine popup contents
+				if (closures[i].properties.links) {
+					console.log("I have a web adress")
+
+					popup += `<p><b>website</b>: <a href='${props.links}'>${props.links}</a></p>`
+
+				} else {
+					console.log("have no url, exclude from popup");
+				}		
+			}		
+		}	
+	}).addTo(map);
+	
+
+	// add popup to polygons
+//closures.bindPopup(function (layer) {
+	//	return L.Util.template(layer.feature.properties.ClosStat)
+	//});
+
+	
+
+
 
 </script>
 
