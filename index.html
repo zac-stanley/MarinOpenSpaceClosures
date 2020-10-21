@@ -212,13 +212,33 @@
 	countyLayer.addTo(map);
 
 	// add viewLayer from AGOL
-	const closures = L.esri.featureLayer({url: 'https://services5.arcgis.com/tdQLEzq0fgVElWN3/arcgis/rest/services/MarinClosures_2020_ViewLayer/FeatureServer/0?token=LnMCOqvaoF4J59yY3FckdhlwQAZcqW56wUry4JkcHk26eNhSQ_WUh7TD7hYIQKJND_yKgPU8onMCyEk7UwnXAqgHvLPwN8zR-FekJ_5V03Kv5kXs8BRyP-4sFU1bkfIEeYl735UWS_RHBl8A0q_l_nuEx5OVGxiNU9yrrQZNaseMPjQbXUf_iSx4A7puiz7rKZEuYrJztPJv329yAJck6M96VCD-EUSKp_ZvF9QjxAM6OhdAxMMf7ZDGgGLZnBDN33bVCpSwFMfusV-hBKE4aQ..'},
-	{	// convert feature layer to geoJson
-		pointToLayer: function(feature, latlng) {
-			console.log();
-			return closures
+	const closures = L.esri.featureLayer({url: 'https://services5.arcgis.com/tdQLEzq0fgVElWN3/arcgis/rest/services/MarinClosures_2020_ViewLayer/FeatureServer/0?token=LnMCOqvaoF4J59yY3FckdhlwQAZcqW56wUry4JkcHk26eNhSQ_WUh7TD7hYIQKJND_yKgPU8onMCyEk7UwnXAqgHvLPwN8zR-FekJ_5V03Kv5kXs8BRyP-4sFU1bkfIEeYl735UWS_RHBl8A0q_l_nuEx5OVGxiNU9yrrQZNaseMPjQbXUf_iSx4A7puiz7rKZEuYrJztPJv329yAJck6M96VCD-EUSKp_ZvF9QjxAM6OhdAxMMf7ZDGgGLZnBDN33bVCpSwFMfusV-hBKE4aQ..',
+	
+		// style feature based on propeties
+		style: function (feature) { 
+      if (feature.properties.ClosStat == 'Open') {
+				return { color: 'false',
+				fillColor: '#00A12A',
+				opacity: false,
+				fillOpacity: false };	
+			} else if (feature.properties.ClosStat == 'Closed') {
+				return { 	color: 'false',
+				fillColor: '#ed1c24',
+				opacity: false,
+				fillOpacity: false };	
+			} else if (feature.properties.ClosStat == 'Open with parking and road restrictions') {
+				return { 	color: 'false',
+				fillColor: '#00ED3F',
+				opacity: false,
+				fillOpacity: false };	
+			}	else if (feature.properties.ClosStat == 'Open to walk, bike and horse access only') {
+				return { 	color: 'false',
+				fillColor: '#ffde17',
+				opacity: false,
+				fillOpacity: false };	
+			}
 		}
-	}).addTo(map);
+}).addTo(map);
 
 </script>
 
